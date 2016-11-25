@@ -11,7 +11,9 @@ var listener = new ROSLIB.Topic({
 });
 
 listener.subscribe(function(message) {
-	for( e in message )
+	str = JSON.stringify(message);
+	for( e in message ){
 		tbl = document.getElementById(e).innerHTML = message[e];
+	}
 });
 

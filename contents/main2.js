@@ -11,7 +11,8 @@ var listener = new ROSLIB.Topic({
 });
 
 listener.subscribe(function(message) {
-	for( e in message )
-		tbl = document.getElementById(e).innerHTML = message[e];
+	str = JSON.stringify(message);
+	document.getElementById("lightsensors").innerHTML = str;
+	console.log(str);
 });
 

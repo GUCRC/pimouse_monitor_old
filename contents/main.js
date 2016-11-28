@@ -12,6 +12,10 @@ var listener = new ROSLIB.Topic({
 
 listener.subscribe(function(message) {
 	for( e in message )
-		tbl = document.getElementById(e).innerHTML = message[e];
+		document.getElementById(e).innerHTML = message[e];
 });
+
+document.getElementById('camera').innerHTML += '<iframe src="http://'
+	+ location.hostname 
+	+ ':10000/stream?topic=/usb_cam/image_raw" style="width:320px;height:240px" />';
 

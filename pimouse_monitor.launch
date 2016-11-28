@@ -4,4 +4,13 @@
      <arg name="port" value="9000"/>
   </include>
   <include file="$(find pimouse_ros)/pimouse.launch" /> 
+
+  <node pkg="usb_cam" name="usb_cam" type="usb_cam_node" >
+    <param name="pixel_format" value="yuyv" />
+    <param name="framerate" value="2" />
+  </node>
+  <node pkg="mjpeg_server" name="mjpeg_server" type="mjpeg_server" >
+    <param name="port" value="10000" />
+  </node>
+
 </launch>

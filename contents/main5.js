@@ -31,15 +31,17 @@ var off = new ROSLIB.Service({
 
 var vel = new ROSLIB.Topic({
 	ros : ros,
-	name : '/motor_raw',
-	messageType : 'pimouse_ros/MotorFreqs'
+	name : '/cmd_vel',
+	messageType : 'geometry_msgs/Twist'
 });
 
 function pubMotorValues(){
-	lhz = document.getElementById("left_hz_val").innerHTML;
-	rhz = document.getElementById("right_hz_val").innerHTML;
-	console.log(lhz);
-	v = new ROSLIB.Message({left_hz: parseInt(lhz),right_hz : parseInt(rhz)});
+	fw = document.getElementById("vel_fw").innerHTML;
+	rot = document.getElementById("vel_rot").innerHTML;
+
+	fw = parseInt(fw)*0.001;
+	rot = 3.141592*parseInt(rot)/180;
+	v = new ROSLIB.Message({linear:{x:fw,y:0,z:0}, angular:{x:0,y:0,z:rot}});
 	vel.publish(v);
 }
 
@@ -59,17 +61,29 @@ document.getElementById("motor_off").addEventListener("click", function(e){
 	});
 });
 
+document.getElementById("touchmotion").addEventListener("click", function(e){
+	rect = document.getElementById("touchmotion").getBoundingClientRect();
+	x = e.pageX - rect.left - window.pageXOffset;
+	y = e.pageY - rect.top - window.pageYOffset;
 
+	vel_fw = (rect.height/2 - y)*3;
+	vel_rot = rect.width/2 - x;
+	document.getElementById("vel_fw").innerHTML = parseInt(vel_fw);
+	document.getElementById("vel_rot").innerHTML = parseInt(vel_rot);
+});
+
+
+/*
 document.getElementById("left_hz_slide").addEventListener("change", function(e){
 	document.getElementById("left_hz_val").innerHTML 
 		= document.getElementById("left_hz_slide").value;
-//	vel.publish(motorFreqGen());
 });
 
 document.getElementById("right_hz_slide").addEventListener("change", function(e){
 	document.getElementById("right_hz_val").innerHTML
 	       = document.getElementById("right_hz_slide").value;
 });
+*/
 
 setInterval(pubMotorValues,100);
 

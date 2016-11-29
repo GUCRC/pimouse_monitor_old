@@ -26,19 +26,18 @@
 	<div class="col-md-4">
           <h2>Motors <button type="button" class="btn btn-danger" id="motor_on">ON</button>
 	  <button type="button" class="btn btn-primary" id="motor_off">OFF</button></h2>
+	  <!--
 	  <div>
 	    <input type="range" id="left_hz_slide" min="-1000" max="1000" step="5" value="0" />
-	    <span id="left_hz_val">0</span>
 	  </div>
 	  <div>
 	    <input type="range" id="right_hz_slide" min="-1000" max="1000" step="5" value="0" />
-	    <span id="right_hz_val">0</span>
-	  </div>
-	  <!--
-	  <div style="width:300px;height:300px;border:solid;text-align:right" id="touchmotion">
-            Touch to move it.
 	  </div>
 	  -->
+	  <div style="width:300px;height:300px;background-color:ivory" id="touchmotion">
+            Touch to move it.
+	  </div>
+	  <span id="vel_fw">0</span>[mm/s]&nbsp;<span id="vel_rot">0</span>[deg/s]
 	</div>
         <div class="col-md-4">
 	  <h2>Light Sensors</h2>

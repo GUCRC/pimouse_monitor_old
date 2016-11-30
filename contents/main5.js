@@ -72,7 +72,6 @@ document.getElementById("touchmotion").addEventListener("click", function(e){
 	document.getElementById("vel_rot").innerHTML = parseInt(vel_rot);
 });
 
-
 /*
 document.getElementById("left_hz_slide").addEventListener("change", function(e){
 	document.getElementById("left_hz_val").innerHTML 
@@ -88,8 +87,8 @@ document.getElementById("right_hz_slide").addEventListener("change", function(e)
 setInterval(pubMotorValues,100);
 
 //CAMERA/////////////////////////////////////////////////////////
-document.getElementById('camera').innerHTML += '<iframe src="http://'
-	+ location.hostname 
-	+ ':10000/stream?topic=/usb_cam/image_raw" style="width:320px;height:240px" />';
+document.getElementById('camera').innerHTML += '<object data=' 
+	+ '"http://' + location.hostname + ':10000/stream?topic=/usb_cam/image_raw"'
+	+ ' style="width:300px;height:240px"/>';
 
 

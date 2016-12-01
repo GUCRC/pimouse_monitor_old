@@ -15,7 +15,7 @@ listener.subscribe(function(message) {
 		document.getElementById(e).innerHTML = message[e];
 });
 
-document.getElementById('camera').innerHTML += '<object data="http://'
-	+ location.hostname 
-	+ ':10000/stream?topic=/usb_cam/image_raw" style="width:320px;height:240px" />';
-
+//CAMERA/////////////////////////////////////////////////////////
+document.getElementById('camstream').data = 'http://'
+        + location.hostname
+        + ':10000/stream?topic=/usb_cam/image_raw';

@@ -37,8 +37,8 @@ var vel = new ROSLIB.Topic({
 });
 
 function pubMotorValues(){
-	fw = $("#vel_fw")[0].innerHTML;
-	rot = $("#vel_rot")[0].innerHTML;
+	fw = $('#vel_fw')[0].innerHTML;
+	rot = $('#vel_rot')[0].innerHTML;
 
 	fw = parseInt(fw)*0.001;
 	rot = 3.141592*parseInt(rot)/180;
@@ -46,34 +46,35 @@ function pubMotorValues(){
 	vel.publish(v);
 }
 
-$("#motor_on")[0].addEventListener("click", function(e){
+//$("#motor_on")[0].addEventListener("click", function(e){
+$('#motor_on')[0].on('click', function(e){
 	req = on.callService(ROSLIB.ServiceRequest(),function(result){
 		if(result.success){
-			$("#motor_on")[0].className = "btn btn-danger";
-			$("#motor_off")[0].className = "btn btn-default";
+			$('#motor_on')[0].className = 'btn btn-danger';
+			$('#motor_off')[0].className = 'btn btn-default';
 		}
 	});
 
 });
 	
-$("#motor_off")[0].addEventListener("click", function(e){
+$('#motor_off')[0].on('click', function(e){
 	req = off.callService(ROSLIB.ServiceRequest(),function(result){
 		if(result.success){
-			$("#motor_on")[0].className = "btn btn-default";
-			$("#motor_off")[0].className = "btn btn-primary";
+			$('#motor_on')[0].className = 'btn btn-default';
+			$('#motor_off')[0].className = 'btn btn-primary';
 		}
 	});
 });
 
-$("#touchmotion")[0].addEventListener("click", function(e){
-	rect = $("#touchmotion")[0].getBoundingClientRect();
+$('#touchmotion')[0].on('click', function(e){
+	rect = $('#touchmotion')[0].getBoundingClientRect();
 	x = e.pageX - rect.left - window.pageXOffset;
 	y = e.pageY - rect.top - window.pageYOffset;
 
 	vel_fw = (rect.height/2 - y)*3;
 	vel_rot = rect.width/2 - x;
-	$("#vel_fw")[0].innerHTML = parseInt(vel_fw);
-	$("#vel_rot")[0].innerHTML = parseInt(vel_rot);
+	$('#vel_fw')[0].innerHTML = parseInt(vel_fw);
+	$('#vel_rot')[0].innerHTML = parseInt(vel_rot);
 });
 
 setInterval(pubMotorValues,100);

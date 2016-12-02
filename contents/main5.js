@@ -13,7 +13,7 @@ var ls = new ROSLIB.Topic({
 
 ls.subscribe(function(message) {
 	Object.keys(message).forEach(function(e){
-		$("#"+e)[0].innerHTML = message[e];
+		$("#"+e).html(message[e]);
 	});
 });
 
@@ -37,8 +37,8 @@ var vel = new ROSLIB.Topic({
 });
 
 function pubMotorValues(){
-	fw = $('#vel_fw')[0].innerHTML;
-	rot = $('#vel_rot')[0].innerHTML;
+	fw = $('#vel_fw').html();
+	rot = $('#vel_rot').html();
 
 	fw = parseInt(fw)*0.001;
 	rot = 3.141592*parseInt(rot)/180;
@@ -46,40 +46,41 @@ function pubMotorValues(){
 	vel.publish(v);
 }
 
-//$("#motor_on")[0].addEventListener("click", function(e){
-$('#motor_on')[0].on('click', function(e){
-	req = on.callService(ROSLIB.ServiceRequest(),function(result){
+//$('#motor_on')[0].addEventListener('click', function(e){
+$('#motor_on').on('click', function(e){
+	on.callService(ROSLIB.ServiceRequest(),function(result){
 		if(result.success){
-			$('#motor_on')[0].className = 'btn btn-danger';
-			$('#motor_off')[0].className = 'btn btn-default';
+			$('#motor_on').attr('class','btn btn-danger');
+			$('#motor_off').attr('class','btn btn-default');
 		}
 	});
 
 });
 	
-$('#motor_off')[0].on('click', function(e){
-	req = off.callService(ROSLIB.ServiceRequest(),function(result){
+$('#motor_off').on('click', function(e){
+//$('#motor_off')[0].addEventListener('click', function(e){
+	off.callService(ROSLIB.ServiceRequest(),function(result){
 		if(result.success){
-			$('#motor_on')[0].className = 'btn btn-default';
-			$('#motor_off')[0].className = 'btn btn-primary';
+			$('#motor_on').attr('class','btn btn-default');
+			$('#motor_off').attr('class','btn btn-primary');
 		}
 	});
 });
 
-$('#touchmotion')[0].on('click', function(e){
+//$('#touchmotion')[0].addEventListener('click', function(e){
+$('#touchmotion').on('click', function(e){
 	rect = $('#touchmotion')[0].getBoundingClientRect();
 	x = e.pageX - rect.left - window.pageXOffset;
 	y = e.pageY - rect.top - window.pageYOffset;
 
 	vel_fw = (rect.height/2 - y)*3;
 	vel_rot = rect.width/2 - x;
-	$('#vel_fw')[0].innerHTML = parseInt(vel_fw);
-	$('#vel_rot')[0].innerHTML = parseInt(vel_rot);
+	$('#vel_fw').html(parseInt(vel_fw));
+	$('#vel_rot').html(parseInt(vel_rot));
 });
 
 setInterval(pubMotorValues,100);
 
 //CAMERA/////////////////////////////////////////////////////////
-$('#camstream')[0].data = 'http://' 
-	+ location.hostname 
-	+ ':10000/stream?topic=/usb_cam/image_raw';
+$('#camstream').attr('data', 'http://' + location.hostname 
+	+ ':10000/stream?topic=/usb_cam/image_raw');

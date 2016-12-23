@@ -18,4 +18,4 @@ listener.subscribe(function(message) {
 //CAMERA/////////////////////////////////////////////////////////
 document.getElementById('camstream').data = 'http://'
         + location.hostname
-        + ':10000/stream?topic=/usb_cam/image_raw';
+        + ':10000/stream?topic=/cv_camera_node/image_raw';
